@@ -139,12 +139,14 @@
       <a class="btn" href="https://www.instagram.com/blessmedammy" target="_blank">Message on Instagram</a>
     </div>
 
-    <form style="margin-top:25px; display:flex; flex-direction:column; gap:12px;">
-      <input type="text" placeholder="Your Name" required style="padding:12px;border-radius:8px;border:none;" />
-      <input type="email" placeholder="Your Email" required style="padding:12px;border-radius:8px;border:none;" />
-      <textarea placeholder="Your Message" rows="4" required style="padding:12px;border-radius:8px;border:none;"></textarea>
-      <button class="btn" type="submit" onclick="window.open('https://wa.me/2348155586606','_blank')">Send Message</button>
+    <form action="https://formspree.io/f/mzdaeyrv" method="POST" style="margin-top:25px; display:flex; flex-direction:column; gap:12px;">
+      <input name="name" type="text" placeholder="Your Name" required style="padding:12px;border-radius:8px;border:none;" />
+      <input name="email" type="email" placeholder="Your Email" required style="padding:12px;border-radius:8px;border:none;" />
+      <textarea name="message" placeholder="Your Message" rows="4" required style="padding:12px;border-radius:8px;border:none;"></textarea>
+      <button class="btn" type="submit">Send Message</button>
     </form>
+
+    <p style="margin-top:10px;font-size:13px;color:#bbb;">Messages are sent directly to my email inbox.</p>
   </div>
 </section>
 
