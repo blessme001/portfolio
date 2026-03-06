@@ -20,7 +20,10 @@
       --radius: 22px;
       --max: 1180px;
     }* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -114,23 +117,37 @@ img { max-width: 100%; display: block; }
 
 .nav-links {
   display: flex;
-  gap: 18px;
+  gap: 12px;
   flex-wrap: wrap;
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line);
+  padding: 8px;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
 }
 
 .nav-links a {
   color: var(--muted);
   font-size: 0.95rem;
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition: color 0.25s ease, transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--accent);
   transform: translateY(-1px);
+  background: rgba(214,185,140,0.08);
+  border-color: rgba(214,185,140,0.18);
 }
 
 .hero {
   position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   overflow: hidden;
   min-height: 92vh;
   display: flex;
@@ -228,11 +245,14 @@ h1 {
 }
 
 .hero-contact a,
-.hero-contact span { color: var(--muted); }
+.hero-contact span {
+  color: var(--text);
+  text-shadow: 0 2px 18px rgba(0,0,0,0.28);
+}
 .hero-contact a:hover { color: var(--accent); }
 
 .hero p {
-  color: var(--muted);
+  color: rgba(238,243,255,0.9);
   font-size: 1.06rem;
   max-width: 760px;
   margin: 0 0 26px;
@@ -388,6 +408,8 @@ h1 {
   cursor: pointer;
   font: inherit;
   transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  margin-left: 4px;
+  white-space: nowrap;
 }
 
 .theme-toggle:hover {
@@ -436,22 +458,22 @@ h1 {
 body.light-mode {
   --bg: #f3f6fb;
   --bg-soft: #ffffff;
-  --panel: rgba(255,255,255,0.78);
-  --panel-strong: rgba(255,255,255,0.95);
-  --line: rgba(20,28,45,0.1);
-  --line-strong: rgba(178,140,84,0.28);
-  --text: #132033;
-  --muted: #526177;
-  --accent: #b38445;
-  --accent-2: #9b6a28;
+  --panel: rgba(255,255,255,0.84);
+  --panel-strong: rgba(255,255,255,0.97);
+  --line: rgba(20,28,45,0.12);
+  --line-strong: rgba(178,140,84,0.34);
+  --text: #0f1c2e;
+  --muted: #415166;
+  --accent: #9a6a2d;
+  --accent-2: #7e531d;
   --shadow: 0 20px 60px rgba(17, 32, 51, 0.12);
   background:
-    radial-gradient(circle at top left, rgba(179,132,69,0.12), transparent 18%),
-    linear-gradient(180deg, #f7f9fc 0%, #edf2f8 45%, #eaf0f7 100%);
+    radial-gradient(circle at top left, rgba(179,132,69,0.14), transparent 18%),
+    linear-gradient(180deg, #fafbfd 0%, #eef3f8 45%, #e8eef6 100%);
 }
 
 body.light-mode .navbar {
-  background: rgba(255,255,255,0.74);
+  background: rgba(255,255,255,0.86);
 }
 
 body.light-mode .hero::before {
@@ -475,7 +497,40 @@ body.light-mode .btn-secondary,
 body.light-mode .theme-toggle,
 body.light-mode input,
 body.light-mode textarea {
-  background: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.86);
+  color: var(--text);
+}
+
+body.light-mode .hero p,
+body.light-mode .hero-contact a,
+body.light-mode .hero-contact span {
+  color: #162337;
+  text-shadow: none;
+}
+
+body.light-mode .hero-meta span,
+body.light-mode .badge-list li,
+body.light-mode .skill-list li {
+  color: #243246;
+  background: rgba(154,106,45,0.08);
+  border-color: rgba(154,106,45,0.18);
+}
+
+body.light-mode .nav-links {
+  background: rgba(255,255,255,0.76);
+}
+
+body.light-mode .nav-links a {
+  color: #3f4d62;
+}
+
+body.light-mode .nav-links a:hover,
+body.light-mode .brand,
+body.light-mode .section-title,
+body.light-mode .card h3,
+body.light-mode .card h4,
+body.light-mode .timeline-item .meta {
+  color: var(--accent);
 }
 
 .hero-card::before {
@@ -499,13 +554,15 @@ section {
   z-index: 2;
   padding: 82px 0;
   scroll-margin-top: 84px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .panel-pop {
   position: relative;
-  transform: translateY(70px) scale(0.98);
+  transform: translateY(90px) scale(0.965);
   opacity: 0;
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease, box-shadow 0.35s ease;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease, box-shadow 0.35s ease;
   will-change: transform, opacity;
 }
 
@@ -514,13 +571,18 @@ section {
   opacity: 1;
 }
 
+.panel-pop.visible > .container {
+  box-shadow: 0 32px 100px rgba(0,0,0,0.28);
+}
+
 .panel-pop > .container {
-  background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.022));
   border: 1px solid var(--line);
   border-radius: 28px;
   padding: 34px 28px;
   box-shadow: var(--shadow);
   backdrop-filter: blur(16px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 body.light-mode .panel-pop > .container {
@@ -543,7 +605,7 @@ section:nth-of-type(n+2)::before {
 }
 
 .section-subtitle {
-  color: var(--muted);
+  color: color-mix(in srgb, var(--text) 72%, var(--muted) 28%);
   max-width: 780px;
   margin: 0 0 30px;
 }
@@ -556,7 +618,19 @@ section:nth-of-type(n+2)::before {
 
 .card {
   padding: 26px;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.7s ease;
+}
+
+.card.reveal-item,
+.timeline-item.reveal-item {
+  opacity: 0;
+  transform: translateY(26px) scale(0.985);
+}
+
+.card.reveal-item.visible,
+.timeline-item.reveal-item.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .card:hover,
@@ -572,9 +646,8 @@ section:nth-of-type(n+2)::before {
 .education p,
 .timeline-item ul,
 .contact-list li,
-.section-subtitle,
 .card li {
-  color: var(--muted);
+  color: color-mix(in srgb, var(--text) 70%, var(--muted) 30%);
 }
 
 .badge-list,
@@ -737,6 +810,17 @@ footer {
     gap: 12px;
   }
 
+  .nav-links {
+    border-radius: 22px;
+    padding: 8px;
+  }
+
+  .nav-links a,
+  .theme-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
   .hero {
     min-height: auto;
   }
@@ -752,6 +836,10 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+  }
+
   *, *::before, *::after {
     animation: none !important;
     transition: none !important;
@@ -779,7 +867,7 @@ footer {
         <a href="#contact">Contact</a>
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark and light mode">
           <span class="theme-dot"></span>
-          <span id="themeLabel">Light Mode</span>
+          <span id="themeLabel">Switch Theme</span>
         </button>
       </nav>
     </div>
@@ -845,13 +933,13 @@ footer {
     </div>
     <p class="section-subtitle">I bring together practical safety awareness, building technology knowledge, and hands-on digital capability.</p>
     <div class="grid-2">
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Professional Summary</h3>
         <p>Resourceful Building Technology Education graduate and Health, Safety &amp; Environment professional with practical experience in industrial safety operations, hazard identification, and regulatory compliance within operational environments. Currently working as an HSE Officer supporting safe work practices at the Lagos Deep Offshore Logistics Base (LADOL).</p>
         <p>Possess strong knowledge of construction principles, sustainable building practices, and renewable energy applications, combined with practical experience in risk assessment, site safety inspections, and safety training.</p>
         <p>Also experienced in digital technologies, web development, and AI productivity tools, with a track record of developing digital platforms, automation solutions, and technology-based business initiatives.</p>
       </div>
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Professional Strengths</h3>
         <ul class="badge-list">
           <li>Workplace Safety Commitment</li>
@@ -876,7 +964,7 @@ footer {
     </div>
     <p class="section-subtitle">A blend of HSE capability, technical knowledge, business awareness, and digital skills.</p>
     <div class="grid-2">
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Health, Safety &amp; Environment</h3>
         <ul>
           <li>HSE Compliance &amp; Regulatory Awareness</li>
@@ -886,7 +974,7 @@ footer {
           <li>Incident Reporting &amp; Investigation</li>
         </ul>
       </div>
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Construction &amp; Technical Knowledge</h3>
         <ul>
           <li>Building Technology &amp; Construction Principles</li>
@@ -895,7 +983,7 @@ footer {
           <li>Renewable Energy Awareness</li>
         </ul>
       </div>
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Business &amp; Operational Skills</h3>
         <ul>
           <li>Procurement &amp; Technical Sales</li>
@@ -904,7 +992,7 @@ footer {
           <li>Operations Coordination &amp; Record Keeping</li>
         </ul>
       </div>
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Technology &amp; Digital Skills</h3>
         <ul>
           <li>AI Productivity Tools &amp; Digital Workflow Systems</li>
@@ -926,7 +1014,7 @@ footer {
     </div>
     <p class="section-subtitle">Experience across safety operations, digital development, and business execution.</p>
     <div class="timeline">
-      <article class="timeline-item">
+      <article class="timeline-item reveal-item">
         <h3>Health, Safety &amp; Environment (HSE) Officer</h3>
         <div class="meta">Amborg Global Resources Limited • Client: LADOL – Lagos Deep Offshore Logistics Base • Lagos, Nigeria • May 2025 – Present</div>
         <ul>
@@ -941,7 +1029,7 @@ footer {
         <p class="muted"><strong>Key Contribution:</strong> Promoted increased safety awareness among site personnel through consistent hazard identification and safety communication.</p>
       </article>
 
-      <article class="timeline-item">
+      <article class="timeline-item reveal-item">
         <h3>Technology &amp; Digital Solutions Developer</h3>
         <div class="meta">Freelance / Independent Projects • Nigeria • 2023 – Present</div>
         <ul>
@@ -955,7 +1043,7 @@ footer {
         </ul>
       </article>
 
-      <article class="timeline-item">
+      <article class="timeline-item reveal-item">
         <h3>Procurement &amp; Technical Sales Specialist</h3>
         <div class="meta">Self-Employed • Nigeria • 2019 – Present</div>
         <ul>
@@ -979,19 +1067,19 @@ footer {
     </div>
     <p class="section-subtitle">Selected work reflecting technical, academic, and digital experience.</p>
     <div class="grid-2">
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Solar Panel System Design Project</h3>
         <p>Designed and implemented a solar panel system as part of an academic project focused on renewable energy integration within buildings.</p>
       </div>
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Final Year Research Project</h3>
         <p>Conducted research on <em>Skill Improvement Needs among Building Technology Education Students in Ilorin Universities</em>, identifying technical skill gaps and recommending strategies to improve industry readiness.</p>
       </div>
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Professional Portfolio Website</h3>
         <p>Designed and deployed a personal portfolio website to showcase professional background, projects, and direct contact functionality.</p>
       </div>
-      <div class="card">
+      <div class="card reveal-item">
         <h3>BMS TECH Digital Marketplace</h3>
         <p>Developing an online technology marketplace focused on the sale of mobile phones and laptops, with ongoing digital setup and brand development.</p>
       </div>
@@ -1006,11 +1094,11 @@ footer {
       <h2 class="section-title">Education &amp; Training</h2>
     </div>
     <div class="grid-2">
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Education</h3>
         <p><strong>B.Sc.Ed – Building Technology Education</strong><br />University of Ilorin, Kwara State, Nigeria<br />2024</p>
       </div>
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Training &amp; Professional Development</h3>
         <p><strong>Health, Safety &amp; Environment Practical Training</strong></p>
         <ul>
@@ -1034,7 +1122,7 @@ footer {
     </div>
     <p class="section-subtitle">For job opportunities, professional inquiries, collaborations, or business discussions.</p>
     <div class="contact-grid">
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Get in Touch</h3>
         <p class="muted">I am open to HSE roles, technical support work, digital development projects, and business opportunities.</p>
         <ul class="contact-list">
@@ -1045,7 +1133,7 @@ footer {
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card reveal-item">
         <h3>Send a Message</h3>
         <form action="https://formspree.io/f/mzdaeyrv" method="POST">
           <input type="text" name="name" placeholder="Your Name" required />
@@ -1064,7 +1152,7 @@ footer {
       <p>© 2026 Adegboye Blessme Damilola. All rights reserved.</p>
     </div>
   </footer>  <script>
-    const revealElements = document.querySelectorAll('.reveal');
+    const revealElements = document.querySelectorAll('.reveal, .reveal-item');
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -1074,7 +1162,29 @@ footer {
       });
     }, { threshold: 0.14 });
 
-    revealElements.forEach((el) => observer.observe(el));
+    revealElements.forEach((el, index) => {
+      if (el.classList.contains('reveal-item')) {
+        el.style.transitionDelay = `${Math.min(index * 40, 220)}ms`;
+      }
+      observer.observe(el);
+    });
+
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    const setActiveNav = () => {
+      let current = 'home';
+      sections.forEach((section) => {
+        const top = section.getBoundingClientRect().top;
+        if (top <= 140) current = section.id;
+      });
+      navLinks.forEach((link) => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    };
+
+    setActiveNav();
+    window.addEventListener('scroll', setActiveNav, { passive: true });
 
     const heroBgs = document.querySelectorAll('.hero-bg');
     window.addEventListener('scroll', () => {
@@ -1092,6 +1202,7 @@ footer {
       const isLight = theme === 'light';
       document.body.classList.toggle('light-mode', isLight);
       themeLabel.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
       localStorage.setItem('portfolio-theme', theme);
     };
 
