@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,564 +19,755 @@
       --shadow: 0 24px 80px rgba(0,0,0,0.38);
       --radius: 22px;
       --max: 1180px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(214,185,140,0.08), transparent 18%),
-        linear-gradient(180deg, #05080f 0%, #0a1019 40%, #09111b 100%);
-      color: var(--text);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    .container {
-      width: min(92%, var(--max));
-      margin: 0 auto;
-    }
-
-    .ambient,
-    .ambient::before,
-    .ambient::after {
-      position: fixed;
-      pointer-events: none;
-      inset: auto;
-      border-radius: 999px;
-      filter: blur(70px);
-      z-index: 0;
-    }
-
-    .ambient {
-      width: 320px;
-      height: 320px;
-      top: 12%;
-      left: -80px;
-      background: rgba(214,185,140,0.08);
-      animation: floatGlow 14s ease-in-out infinite;
-    }
-
-    .ambient::before {
-      content: "";
-      width: 260px;
-      height: 260px;
-      top: 180px;
-      right: -1020px;
-      background: rgba(122, 156, 255, 0.08);
-      animation: floatGlow 18s ease-in-out infinite reverse;
-    }
-
-    .ambient::after {
-      content: "";
-      width: 220px;
-      height: 220px;
-      bottom: -420px;
-      left: 420px;
-      background: rgba(214,185,140,0.06);
-      animation: floatGlow 16s ease-in-out infinite;
-    }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(18px);
-      background: rgba(7, 11, 18, 0.62);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 0;
-    }
-
-    .brand {
-      font-weight: 700;
-      letter-spacing: 0.4px;
-      color: var(--accent);
-      position: relative;
-    }
-
-    .brand::after {
-      content: "";
-      display: block;
-      width: 42%;
-      height: 2px;
-      margin-top: 5px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      font-size: 0.95rem;
-      transition: color 0.25s ease, transform 0.25s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 92vh;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid var(--line);
-      isolation: isolate;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: -4%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      filter: blur(10px) brightness(0.45);
-      transform: scale(1.12);
-      opacity: 0;
-      z-index: -3;
-    }
-
-    .hero-bg1 { background-image: url("bg1.jpg"); animation: fade1 24s infinite; }
-    .hero-bg2 { background-image: url("bg2.jpg"); animation: fade2 24s infinite; }
-    .hero-bg3 { background-image: url("bg3.jpg"); animation: fade3 24s infinite; }
-    .hero-bg4 { background-image: url("bg4.jpg"); animation: fade4 24s infinite; }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(6,10,17,0.92) 0%, rgba(6,10,17,0.72) 42%, rgba(6,10,17,0.82) 100%),
-        radial-gradient(circle at 80% 18%, rgba(214,185,140,0.18), transparent 20%),
-        radial-gradient(circle at 18% 80%, rgba(115, 136, 198, 0.16), transparent 20%);
-      z-index: -2;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));
-      z-index: -1;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 32px;
-      align-items: center;
-      padding: 100px 0 72px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 16px;
-      border: 1px solid rgba(214,185,140,0.22);
-      border-radius: 999px;
-      color: var(--accent-2);
-      background: rgba(214,185,140,0.08);
-      margin-bottom: 18px;
-      font-size: 0.92rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.16);
-      animation: fadeUp 0.8s ease both;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 16px var(--accent);
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      line-height: 0.98;
-      margin: 0 0 16px;
-      letter-spacing: -0.03em;
-      animation: fadeUp 0.95s ease both;
-    }
-
-    .hero-contact {
-      display: grid;
-      gap: 8px;
-      margin: 10px 0 20px;
-      color: var(--muted);
-      font-size: 0.98rem;
-      animation: fadeUp 1.05s ease both;
-    }
-
-    .hero-contact a,
-    .hero-contact span { color: var(--muted); }
-    .hero-contact a:hover { color: var(--accent); }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 1.06rem;
-      max-width: 760px;
-      margin: 0 0 26px;
-      animation: fadeUp 1.15s ease both;
-    }
-
-    .hero-actions,
-    .btn-row,
-    .hero-meta {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      animation: fadeUp 1.25s ease both;
-    }
-
-    .hero-actions { margin-bottom: 16px; }
-    .btn-row { margin-bottom: 18px; }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 13px 20px;
-      border-radius: 14px;
-      font-weight: 700;
-      transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
-      border: 1px solid transparent;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 32px rgba(0,0,0,0.22);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, #f0d09e 100%);
-      color: #151515;
-    }
-
-    .btn-secondary {
-      border-color: var(--line);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--line-strong);
-      color: var(--accent);
-      background: rgba(255,255,255,0.06);
-    }
-
-    .hero-meta {
-      gap: 10px;
-    }
-
-    .hero-meta span {
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-      border: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.92rem;
-    }
-
-    .hero-card,
-    .card,
-    .timeline-item {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
-
-    .hero-card {
-      padding: 26px;
-      position: relative;
-      overflow: hidden;
-      animation: floatCard 6s ease-in-out infinite;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-      gap:14px;
-    }
-
-    .profile-photo {
-      width:150px;
-      height:150px;
-      border-radius:50%;
-      object-fit:cover;
-      border:3px solid rgba(214,185,140,0.6);
-      box-shadow:0 10px 40px rgba(0,0,0,0.45);
-      background:#111;
-    }
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(214,185,140,0.1), transparent 38%, transparent 65%, rgba(255,255,255,0.05));
-      pointer-events: none;
-    }
-
-    .hero-card h3,
-    .card h3,
-    .card h4,
-    .section-title,
-    .timeline-item .meta {
-      color: var(--accent);
-    }
-
-    section {
-      position: relative;
-      z-index: 2;
-      padding: 82px 0;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      margin: 0 0 10px;
-      letter-spacing: -0.02em;
-    }
-
-    .section-subtitle {
-      color: var(--muted);
-      max-width: 780px;
-      margin: 0 0 30px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .card {
-      padding: 26px;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover,
-    .timeline-item:hover {
-      transform: translateY(-6px);
-      border-color: rgba(214,185,140,0.18);
-      box-shadow: 0 26px 56px rgba(0,0,0,0.26);
-    }
-
-    .muted,
-    .projects .card p,
-    .about p,
-    .education p,
-    .timeline-item ul,
-    .contact-list li,
-    .section-subtitle,
-    .card li {
-      color: var(--muted);
-    }
-
-    .badge-list,
-    .skill-list,
-    .contact-list {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    .badge-list,
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .badge-list li,
-    .skill-list li {
-      background: rgba(214,185,140,0.09);
-      border: 1px solid rgba(214,185,140,0.18);
-      color: #f3e0c2;
-      padding: 9px 13px;
-      border-radius: 999px;
-      font-size: 0.92rem;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 20px;
-    }
-
-    .timeline-item {
-      padding: 24px;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .timeline-item h3 {
-      margin: 0 0 6px;
-      color: var(--text);
-    }
-
-    .timeline-item .meta {
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-    }
-
-    .timeline-item ul {
-      margin: 12px 0 0;
-      padding-left: 18px;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 24px;
-    }
-
-    form {
-      display: grid;
-      gap: 14px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 14px 15px;
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      font: inherit;
-      outline: none;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    }
-
-    input:focus, textarea:focus {
-      border-color: rgba(214,185,140,0.45);
-      box-shadow: 0 0 0 4px rgba(214,185,140,0.1);
-      background: rgba(255,255,255,0.06);
-    }
-
-    textarea {
-      min-height: 160px;
-      resize: vertical;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    footer {
-      position: relative;
-      z-index: 2;
-      padding: 30px 0 44px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      text-align: center;
-      background: rgba(255,255,255,0.01);
-    }
-
-    @keyframes fade1 {
-      0%, 24% { opacity: 1; }
-      25%, 100% { opacity: 0; }
-    }
-
-    @keyframes fade2 {
-      0%, 24% { opacity: 0; }
-      25%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
-    }
-
-    @keyframes fade3 {
-      0%, 49% { opacity: 0; }
-      50%, 74% { opacity: 1; }
-      75%, 100% { opacity: 0; }
-    }
-
-    @keyframes fade4 {
-      0%, 74% { opacity: 0; }
-      75%, 100% { opacity: 1; }
-    }
-
-    @keyframes floatGlow {
-      0%, 100% { transform: translate3d(0, 0, 0); }
-      50% { transform: translate3d(24px, -28px, 0); }
-    }
-
-    @keyframes floatCard {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 920px) {
-      .hero-grid,
-      .grid-2,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      .hero-grid {
-        padding-top: 82px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
-    }
+    }* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(214,185,140,0.08), transparent 18%),
+    linear-gradient(180deg, #05080f 0%, #0a1019 40%, #09111b 100%);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.container {
+  width: min(92%, var(--max));
+  margin: 0 auto;
+}
+
+.ambient,
+.ambient::before,
+.ambient::after {
+  position: fixed;
+  pointer-events: none;
+  inset: auto;
+  border-radius: 999px;
+  filter: blur(70px);
+  z-index: 0;
+}
+
+.ambient {
+  width: 320px;
+  height: 320px;
+  top: 12%;
+  left: -80px;
+  background: rgba(214,185,140,0.08);
+  animation: floatGlow 14s ease-in-out infinite;
+}
+
+.ambient::before {
+  content: "";
+  width: 260px;
+  height: 260px;
+  top: 180px;
+  right: -1020px;
+  background: rgba(122, 156, 255, 0.08);
+  animation: floatGlow 18s ease-in-out infinite reverse;
+}
+
+.ambient::after {
+  content: "";
+  width: 220px;
+  height: 220px;
+  bottom: -420px;
+  left: 420px;
+  background: rgba(214,185,140,0.06);
+  animation: floatGlow 16s ease-in-out infinite;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(18px);
+  background: rgba(7, 11, 18, 0.62);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--accent);
+  position: relative;
+}
+
+.brand::after {
+  content: "";
+  display: block;
+  width: 42%;
+  height: 2px;
+  margin-top: 5px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: var(--muted);
+  font-size: 0.95rem;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  isolation: isolate;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: -4%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(5px) brightness(0.62);
+  transform: scale(1.08);
+  opacity: 0;
+  z-index: -3;
+  transition: filter 0.4s ease;
+}
+
+.hero-bg1 { background-image: url("bg1.jpg"); animation: fade1 24s infinite; }
+.hero-bg2 { background-image: url("bg2.jpg"); animation: fade2 24s infinite; }
+.hero-bg3 { background-image: url("bg3.jpg"); animation: fade3 24s infinite; }
+.hero-bg4 { background-image: url("bg4.jpg"); animation: fade4 24s infinite; }
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6,10,17,0.92) 0%, rgba(6,10,17,0.72) 42%, rgba(6,10,17,0.82) 100%),
+    radial-gradient(circle at 80% 18%, rgba(214,185,140,0.18), transparent 20%),
+    radial-gradient(circle at 18% 80%, rgba(115, 136, 198, 0.16), transparent 20%);
+  z-index: -2;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));
+  z-index: -1;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  align-items: center;
+  padding: 100px 0 72px;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  border: 1px solid rgba(214,185,140,0.22);
+  border-radius: 999px;
+  color: var(--accent-2);
+  background: rgba(214,185,140,0.08);
+  margin-bottom: 18px;
+  font-size: 0.92rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+  animation: fadeUp 0.8s ease both;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 0.98;
+  margin: 0 0 16px;
+  letter-spacing: -0.03em;
+  animation: fadeUp 0.95s ease both;
+}
+
+.hero-contact {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 20px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  animation: fadeUp 1.05s ease both;
+}
+
+.hero-contact a,
+.hero-contact span { color: var(--muted); }
+.hero-contact a:hover { color: var(--accent); }
+
+.hero p {
+  color: var(--muted);
+  font-size: 1.06rem;
+  max-width: 760px;
+  margin: 0 0 26px;
+  animation: fadeUp 1.15s ease both;
+}
+
+.hero-actions,
+.btn-row,
+.hero-meta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: fadeUp 1.25s ease both;
+}
+
+.hero-actions { margin-bottom: 16px; }
+.btn-row { margin-bottom: 18px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 20px;
+  border-radius: 14px;
+  font-weight: 700;
+  transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+  border: 1px solid transparent;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.22);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, #f0d09e 100%);
+  color: #151515;
+}
+
+.btn-secondary {
+  border-color: var(--line);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  border-color: var(--line-strong);
+  color: var(--accent);
+  background: rgba(255,255,255,0.06);
+}
+
+.hero-meta {
+  gap: 10px;
+}
+
+.hero-meta span {
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.92rem;
+}
+
+.hero-card,
+.card,
+.timeline-item {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.hero-card {
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  animation: floatCard 6s ease-in-out infinite;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:14px;
+}
+
+.hero-card {
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  animation: floatCard 6s ease-in-out infinite;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:14px;
+}
+
+.profile-shell {
+  position: relative;
+  width: 166px;
+  height: 166px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.profile-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 4px;
+  background: conic-gradient(from 0deg, rgba(214,185,140,0.95), rgba(255,255,255,0.08), rgba(214,185,140,0.95));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: profileRing 7s linear infinite;
+  box-shadow: 0 0 28px rgba(214,185,140,0.24);
+}
+
+.profile-shell::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  opacity: 0.65;
+}
+
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(214,185,140,0.35);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+  background: #111;
+  position: relative;
+  z-index: 1;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  border-color: var(--line-strong);
+}
+
+.theme-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px rgba(214,185,140,0.7);
+}
+
+.section-glow {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214,185,140,0.12), transparent 70%);
+  filter: blur(22px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-header {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 6px;
+}
+
+.section-header::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 28px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent), transparent);
+  box-shadow: 0 0 18px rgba(214,185,140,0.28);
+}
+
+body.light-mode {
+  --bg: #f3f6fb;
+  --bg-soft: #ffffff;
+  --panel: rgba(255,255,255,0.78);
+  --panel-strong: rgba(255,255,255,0.95);
+  --line: rgba(20,28,45,0.1);
+  --line-strong: rgba(178,140,84,0.28);
+  --text: #132033;
+  --muted: #526177;
+  --accent: #b38445;
+  --accent-2: #9b6a28;
+  --shadow: 0 20px 60px rgba(17, 32, 51, 0.12);
+  background:
+    radial-gradient(circle at top left, rgba(179,132,69,0.12), transparent 18%),
+    linear-gradient(180deg, #f7f9fc 0%, #edf2f8 45%, #eaf0f7 100%);
+}
+
+body.light-mode .navbar {
+  background: rgba(255,255,255,0.74);
+}
+
+body.light-mode .hero::before {
+  background:
+    linear-gradient(90deg, rgba(247,249,252,0.9) 0%, rgba(247,249,252,0.72) 42%, rgba(247,249,252,0.82) 100%),
+    radial-gradient(circle at 80% 18%, rgba(179,132,69,0.16), transparent 20%),
+    radial-gradient(circle at 18% 80%, rgba(122, 156, 255, 0.12), transparent 20%);
+}
+
+body.light-mode .hero::after {
+  background: linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.16));
+}
+
+body.light-mode .hero-card,
+body.light-mode .card,
+body.light-mode .timeline-item {
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.72));
+}
+
+body.light-mode .btn-secondary,
+body.light-mode .theme-toggle,
+body.light-mode input,
+body.light-mode textarea {
+  background: rgba(255,255,255,0.72);
+}
+
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(214,185,140,0.1), transparent 38%, transparent 65%, rgba(255,255,255,0.05));
+  pointer-events: none;
+}
+
+.hero-card h3,
+.card h3,
+.card h4,
+.section-title,
+.timeline-item .meta {
+  color: var(--accent);
+}
+
+section {
+  position: relative;
+  z-index: 2;
+  padding: 82px 0;
+  scroll-margin-top: 84px;
+}
+
+.panel-pop {
+  position: relative;
+  transform: translateY(70px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease, box-shadow 0.35s ease;
+  will-change: transform, opacity;
+}
+
+.panel-pop.visible {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.panel-pop > .container {
+  background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 34px 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+body.light-mode .panel-pop > .container {
+  background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.76));
+}
+
+section:nth-of-type(n+2)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.012), transparent 18%, transparent 82%, rgba(255,255,255,0.012));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  color: var(--muted);
+  max-width: 780px;
+  margin: 0 0 30px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.card {
+  padding: 26px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover,
+.timeline-item:hover {
+  transform: translateY(-6px);
+  border-color: rgba(214,185,140,0.18);
+  box-shadow: 0 26px 56px rgba(0,0,0,0.26);
+}
+
+.muted,
+.projects .card p,
+.about p,
+.education p,
+.timeline-item ul,
+.contact-list li,
+.section-subtitle,
+.card li {
+  color: var(--muted);
+}
+
+.badge-list,
+.skill-list,
+.contact-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.badge-list,
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge-list li,
+.skill-list li {
+  background: rgba(214,185,140,0.09);
+  border: 1px solid rgba(214,185,140,0.18);
+  color: #f3e0c2;
+  padding: 9px 13px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+}
+
+.timeline {
+  display: grid;
+  gap: 20px;
+}
+
+.timeline-item {
+  padding: 24px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item h3 {
+  margin: 0 0 6px;
+  color: var(--text);
+}
+
+.timeline-item .meta {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.timeline-item ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 24px;
+}
+
+form {
+  display: grid;
+  gap: 14px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 14px 15px;
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: rgba(214,185,140,0.45);
+  box-shadow: 0 0 0 4px rgba(214,185,140,0.1);
+  background: rgba(255,255,255,0.06);
+}
+
+textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 30px 0 44px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  text-align: center;
+  background: rgba(255,255,255,0.01);
+}
+
+@keyframes fade1 {
+  0%, 24% { opacity: 1; }
+  25%, 100% { opacity: 0; }
+}
+
+@keyframes fade2 {
+  0%, 24% { opacity: 0; }
+  25%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes fade3 {
+  0%, 49% { opacity: 0; }
+  50%, 74% { opacity: 1; }
+  75%, 100% { opacity: 0; }
+}
+
+@keyframes fade4 {
+  0%, 74% { opacity: 0; }
+  75%, 100% { opacity: 1; }
+}
+
+@keyframes floatGlow {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(24px, -28px, 0); }
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes profileRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 920px) {
+  .hero-grid,
+  .grid-2,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-grid {
+    padding-top: 82px;
+  }
+
+  .panel-pop > .container {
+    padding: 26px 18px;
+    border-radius: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
   </style>
 </head>
 <body>
-  <div class="ambient"></div>
-
-  <header class="navbar">
+  <div class="ambient"></div>  <header class="navbar">
     <div class="container nav-inner">
       <a href="#home" class="brand">Adegboye Blessme Damilola</a>
       <nav class="nav-links">
@@ -587,276 +777,293 @@
         <a href="#projects">Projects</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark and light mode">
+          <span class="theme-dot"></span>
+          <span id="themeLabel">Light Mode</span>
+        </button>
       </nav>
     </div>
-  </header>
-
-  <main>
+  </header>  <main>
     <section class="hero" id="home">
       <div class="hero-bg hero-bg1"></div>
       <div class="hero-bg hero-bg2"></div>
       <div class="hero-bg hero-bg3"></div>
-      <div class="hero-bg hero-bg4"></div>
-
-      <div class="container hero-grid">
-        <div>
-          <span class="eyebrow">HSE Officer • Building Technology Graduate • Digital Solutions Developer</span>
-          <h1>Adegboye Blessme Damilola</h1>
-          <div class="hero-contact">
-            <span>Lagos, Nigeria</span>
-            <a href="tel:+2348155586606">+234 815 558 6606</a>
-            <a href="tel:+2348140977018">+234 814 097 7018</a>
-            <a href="mailto:adegboyedamilola6@gmail.com">adegboyedamilola6@gmail.com</a>
-          </div>
-          <p>
-            I am a resourceful Building Technology Education graduate and HSE professional with practical experience in industrial safety operations, hazard identification, compliance support, construction knowledge, and technology-driven solutions. I currently support safe work practices within operational environments while also building digital platforms, websites, and productivity systems.
-          </p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Contact Me</a>
-            <a href="#projects" class="btn btn-secondary">View Projects</a>
-          </div>
-          <div class="btn-row">
-            <a href="cv/ADEGBOYE_BLESSME_DAMILOLA_CV.pdf" class="btn btn-secondary" download>Download CV</a>
-            <a href="https://github.com/blessme001" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-          <div class="hero-meta">
-            <span>HSE Officer</span>
-            <span>Building Technology Graduate</span>
-            <span>Digital Solutions Developer</span>
-          </div>
-        </div>
-
-        <aside class="hero-card">
-          <img src="profile.jpg" alt="Adegboye Blessme Damilola" class="profile-photo">
-          <h3>Professional Snapshot</h3>
-          <ul class="skill-list">
-            <li>HSE Compliance</li>
-            <li>Hazard Identification</li>
-            <li>Risk Assessment</li>
-            <li>Site Safety Monitoring</li>
-            <li>Toolbox Talks</li>
-            <li>Incident Reporting</li>
-            <li>Basic Web Development</li>
-            <li>GitHub Deployment</li>
-            <li>AI Productivity Tools</li>
-            <li>Python Automation</li>
-          </ul>
-        </aside>
+      <div class="hero-bg hero-bg4"></div><div class="container hero-grid">
+    <div>
+      <span class="eyebrow">HSE Officer • Building Technology Graduate • Digital Solutions Developer</span>
+      <h1>Adegboye Blessme Damilola</h1>
+      <div class="hero-contact">
+        <span>Lagos, Nigeria</span>
+        <a href="tel:+2348155586606">+234 815 558 6606</a>
+        <a href="tel:+2348140977018">+234 814 097 7018</a>
+        <a href="mailto:adegboyedamilola6@gmail.com">adegboyedamilola6@gmail.com</a>
       </div>
-    </section>
-
-    <section id="about" class="about reveal">
-      <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <p class="section-subtitle">I bring together practical safety awareness, building technology knowledge, and hands-on digital capability.</p>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Professional Summary</h3>
-            <p>Resourceful Building Technology Education graduate and Health, Safety &amp; Environment professional with practical experience in industrial safety operations, hazard identification, and regulatory compliance within operational environments. Currently working as an HSE Officer supporting safe work practices at the Lagos Deep Offshore Logistics Base (LADOL).</p>
-            <p>Possess strong knowledge of construction principles, sustainable building practices, and renewable energy applications, combined with practical experience in risk assessment, site safety inspections, and safety training.</p>
-            <p>Also experienced in digital technologies, web development, and AI productivity tools, with a track record of developing digital platforms, automation solutions, and technology-based business initiatives.</p>
-          </div>
-          <div class="card">
-            <h3>Professional Strengths</h3>
-            <ul class="badge-list">
-              <li>Workplace Safety Commitment</li>
-              <li>Regulatory Awareness</li>
-              <li>Technical Documentation</li>
-              <li>Adaptability</li>
-              <li>Continuous Learning</li>
-              <li>Engineering Support Mindset</li>
-              <li>Digital Innovation</li>
-              <li>Operational Efficiency Focus</li>
-            </ul>
-          </div>
-        </div>
+      <p>
+        I am a resourceful Building Technology Education graduate and HSE professional with practical experience in industrial safety operations, hazard identification, compliance support, construction knowledge, and technology-driven solutions. I currently support safe work practices within operational environments while also building digital platforms, websites, and productivity systems.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Contact Me</a>
+        <a href="#projects" class="btn btn-secondary">View Projects</a>
       </div>
-    </section>
-
-    <section id="skills" class="reveal">
-      <div class="container">
-        <h2 class="section-title">Core Competencies</h2>
-        <p class="section-subtitle">A blend of HSE capability, technical knowledge, business awareness, and digital skills.</p>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Health, Safety &amp; Environment</h3>
-            <ul>
-              <li>HSE Compliance &amp; Regulatory Awareness</li>
-              <li>Hazard Identification &amp; Risk Assessment</li>
-              <li>Site Safety Inspection &amp; Monitoring</li>
-              <li>Toolbox Talks &amp; Safety Induction Training</li>
-              <li>Incident Reporting &amp; Investigation</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Construction &amp; Technical Knowledge</h3>
-            <ul>
-              <li>Building Technology &amp; Construction Principles</li>
-              <li>Construction Materials &amp; Structural Concepts</li>
-              <li>Sustainable Building Practices</li>
-              <li>Renewable Energy Awareness</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Business &amp; Operational Skills</h3>
-            <ul>
-              <li>Procurement &amp; Technical Sales</li>
-              <li>Negotiation &amp; Pricing Strategy</li>
-              <li>Customer Relationship Management</li>
-              <li>Operations Coordination &amp; Record Keeping</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Technology &amp; Digital Skills</h3>
-            <ul>
-              <li>AI Productivity Tools &amp; Digital Workflow Systems</li>
-              <li>Basic Web Development &amp; Website Management</li>
-              <li>GitHub Version Control &amp; Website Deployment</li>
-              <li>Python Automation (Basic)</li>
-              <li>Technical Troubleshooting &amp; Computer Support</li>
-            </ul>
-          </div>
-        </div>
+      <div class="btn-row">
+        <a href="ADEGBOYE_BLESSME_DAMILOLA_CV.pdf" class="btn btn-secondary" download="ADEGBOYE_BLESSME_DAMILOLA_CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
+        <a href="https://github.com/blessme001" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
-    </section>
-
-    <section id="experience" class="reveal">
-      <div class="container">
-        <h2 class="section-title">Work Experience</h2>
-        <p class="section-subtitle">Experience across safety operations, digital development, and business execution.</p>
-        <div class="timeline">
-          <article class="timeline-item">
-            <h3>Health, Safety &amp; Environment (HSE) Officer</h3>
-            <div class="meta">Amborg Global Resources Limited • Client: LADOL – Lagos Deep Offshore Logistics Base • Lagos, Nigeria • May 2025 – Present</div>
-            <ul>
-              <li>Conduct daily site safety inspections to ensure compliance with company and regulatory HSE standards.</li>
-              <li>Identify workplace hazards and carry out risk assessments to reduce operational risks.</li>
-              <li>Deliver toolbox talks, safety briefings, and safety induction training for workers and contractors.</li>
-              <li>Monitor site operations to ensure adherence to safe work procedures.</li>
-              <li>Report unsafe conditions, incidents, and near misses while supporting incident investigation processes.</li>
-              <li>Maintain HSE documentation, safety records, and compliance reports.</li>
-              <li>Work closely with engineers, supervisors, and operational personnel to strengthen site safety culture.</li>
-            </ul>
-            <p class="muted"><strong>Key Contribution:</strong> Promoted increased safety awareness among site personnel through consistent hazard identification and safety communication.</p>
-          </article>
-
-          <article class="timeline-item">
-            <h3>Technology &amp; Digital Solutions Developer</h3>
-            <div class="meta">Freelance / Independent Projects • Nigeria • 2023 – Present</div>
-            <ul>
-              <li>Design and develop responsive websites for individuals and organizations.</li>
-              <li>Built and deployed a professional portfolio website showcasing personal skills, projects, and services.</li>
-              <li>Developed and managed a digital technology marketplace platform (BMS TECH) focused on the sale of mobile phones and laptops.</li>
-              <li>Utilize AI productivity tools to improve workflow efficiency, content generation, and digital operations.</li>
-              <li>Develop automation scripts and digital tools for operational efficiency and productivity improvement.</li>
-              <li>Manage project repositories, version control, and deployment using GitHub.</li>
-              <li>Provide technical support services including system troubleshooting and digital setup.</li>
-            </ul>
-          </article>
-
-          <article class="timeline-item">
-            <h3>Procurement &amp; Technical Sales Specialist</h3>
-            <div class="meta">Self-Employed • Nigeria • 2019 – Present</div>
-            <ul>
-              <li>Manage procurement and sales of technology devices, real estate opportunities, and related services.</li>
-              <li>Identify market demand and strategically source products and services to meet client needs.</li>
-              <li>Negotiate pricing and service agreements with suppliers and clients.</li>
-              <li>Maintain long-term customer relationships through effective communication and service delivery.</li>
-              <li>Provide technical guidance to customers on product usage and available service options.</li>
-              <li>Maintain accurate records for procurement, sales transactions, and financial operations.</li>
-            </ul>
-          </article>
-        </div>
+      <div class="hero-meta">
+        <span>HSE Officer</span>
+        <span>Building Technology Graduate</span>
+        <span>Digital Solutions Developer</span>
       </div>
-    </section>
+    </div>
 
-    <section id="projects" class="projects reveal">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <p class="section-subtitle">Selected work reflecting technical, academic, and digital experience.</p>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Solar Panel System Design Project</h3>
-            <p>Designed and implemented a solar panel system as part of an academic project focused on renewable energy integration within buildings.</p>
-          </div>
-          <div class="card">
-            <h3>Final Year Research Project</h3>
-            <p>Conducted research on <em>Skill Improvement Needs among Building Technology Education Students in Ilorin Universities</em>, identifying technical skill gaps and recommending strategies to improve industry readiness.</p>
-          </div>
-          <div class="card">
-            <h3>Professional Portfolio Website</h3>
-            <p>Designed and deployed a personal portfolio website to showcase professional background, projects, and direct contact functionality.</p>
-          </div>
-          <div class="card">
-            <h3>BMS TECH Digital Marketplace</h3>
-            <p>Developing an online technology marketplace focused on the sale of mobile phones and laptops, with ongoing digital setup and brand development.</p>
-          </div>
-        </div>
+    <aside class="hero-card">
+      <div class="profile-shell">
+        <img src="profile.jpg" alt="Adegboye Blessme Damilola" class="profile-photo">
       </div>
-    </section>
+      <h3>Professional Snapshot</h3>
+      <ul class="skill-list">
+        <li>HSE Compliance</li>
+        <li>Hazard Identification</li>
+        <li>Risk Assessment</li>
+        <li>Site Safety Monitoring</li>
+        <li>Toolbox Talks</li>
+        <li>Incident Reporting</li>
+        <li>Basic Web Development</li>
+        <li>GitHub Deployment</li>
+        <li>AI Productivity Tools</li>
+        <li>Python Automation</li>
+      </ul>
+    </aside>
+  </div>
+</section>
 
-    <section id="education" class="education reveal">
-      <div class="container">
-        <h2 class="section-title">Education &amp; Training</h2>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Education</h3>
-            <p><strong>B.Sc.Ed – Building Technology Education</strong><br />University of Ilorin, Kwara State, Nigeria<br />2024</p>
-          </div>
-          <div class="card">
-            <h3>Training &amp; Professional Development</h3>
-            <p><strong>Health, Safety &amp; Environment Practical Training</strong></p>
-            <ul>
-              <li>Hazard Identification</li>
-              <li>Risk Assessment</li>
-              <li>Toolbox Talks</li>
-              <li>Incident Reporting</li>
-              <li>Workplace Safety Implementation</li>
-            </ul>
-            <p class="muted"><strong>HSE Professional Certification (Level 1–3):</strong> In Progress</p>
-          </div>
-        </div>
+<section id="about" class="about reveal panel-pop">
+  <div class="section-glow"></div>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">About Me</h2>
+    </div>
+    <p class="section-subtitle">I bring together practical safety awareness, building technology knowledge, and hands-on digital capability.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Professional Summary</h3>
+        <p>Resourceful Building Technology Education graduate and Health, Safety &amp; Environment professional with practical experience in industrial safety operations, hazard identification, and regulatory compliance within operational environments. Currently working as an HSE Officer supporting safe work practices at the Lagos Deep Offshore Logistics Base (LADOL).</p>
+        <p>Possess strong knowledge of construction principles, sustainable building practices, and renewable energy applications, combined with practical experience in risk assessment, site safety inspections, and safety training.</p>
+        <p>Also experienced in digital technologies, web development, and AI productivity tools, with a track record of developing digital platforms, automation solutions, and technology-based business initiatives.</p>
       </div>
-    </section>
-
-    <section id="contact" class="reveal">
-      <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-subtitle">For job opportunities, professional inquiries, collaborations, or business discussions.</p>
-        <div class="contact-grid">
-          <div class="card">
-            <h3>Get in Touch</h3>
-            <p class="muted">I am open to HSE roles, technical support work, digital development projects, and business opportunities.</p>
-            <ul class="contact-list">
-              <li><strong>Location:</strong> Lagos, Nigeria</li>
-              <li><strong>Phone 1:</strong> <a href="tel:+2348155586606">+234 815 558 6606</a></li>
-              <li><strong>Phone 2:</strong> <a href="tel:+2348140977018">+234 814 097 7018</a></li>
-              <li><strong>Email:</strong> <a href="mailto:adegboyedamilola6@gmail.com">adegboyedamilola6@gmail.com</a></li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Send a Message</h3>
-            <form action="https://formspree.io/f/mzdaeyrv" method="POST">
-              <input type="text" name="name" placeholder="Your Name" required />
-              <input type="email" name="email" placeholder="Your Email" required />
-              <input type="text" name="subject" placeholder="Subject" />
-              <textarea name="message" placeholder="Your Message" required></textarea>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-          </div>
-        </div>
+      <div class="card">
+        <h3>Professional Strengths</h3>
+        <ul class="badge-list">
+          <li>Workplace Safety Commitment</li>
+          <li>Regulatory Awareness</li>
+          <li>Technical Documentation</li>
+          <li>Adaptability</li>
+          <li>Continuous Learning</li>
+          <li>Engineering Support Mindset</li>
+          <li>Digital Innovation</li>
+          <li>Operational Efficiency Focus</li>
+        </ul>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
+</section>
 
-  <footer>
+<section id="skills" class="reveal panel-pop">
+  <div class="section-glow"></div>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Core Competencies</h2>
+    </div>
+    <p class="section-subtitle">A blend of HSE capability, technical knowledge, business awareness, and digital skills.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Health, Safety &amp; Environment</h3>
+        <ul>
+          <li>HSE Compliance &amp; Regulatory Awareness</li>
+          <li>Hazard Identification &amp; Risk Assessment</li>
+          <li>Site Safety Inspection &amp; Monitoring</li>
+          <li>Toolbox Talks &amp; Safety Induction Training</li>
+          <li>Incident Reporting &amp; Investigation</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Construction &amp; Technical Knowledge</h3>
+        <ul>
+          <li>Building Technology &amp; Construction Principles</li>
+          <li>Construction Materials &amp; Structural Concepts</li>
+          <li>Sustainable Building Practices</li>
+          <li>Renewable Energy Awareness</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Business &amp; Operational Skills</h3>
+        <ul>
+          <li>Procurement &amp; Technical Sales</li>
+          <li>Negotiation &amp; Pricing Strategy</li>
+          <li>Customer Relationship Management</li>
+          <li>Operations Coordination &amp; Record Keeping</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Technology &amp; Digital Skills</h3>
+        <ul>
+          <li>AI Productivity Tools &amp; Digital Workflow Systems</li>
+          <li>Basic Web Development &amp; Website Management</li>
+          <li>GitHub Version Control &amp; Website Deployment</li>
+          <li>Python Automation (Basic)</li>
+          <li>Technical Troubleshooting &amp; Computer Support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="reveal panel-pop">
+  <div class="section-glow"></div>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Work Experience</h2>
+    </div>
+    <p class="section-subtitle">Experience across safety operations, digital development, and business execution.</p>
+    <div class="timeline">
+      <article class="timeline-item">
+        <h3>Health, Safety &amp; Environment (HSE) Officer</h3>
+        <div class="meta">Amborg Global Resources Limited • Client: LADOL – Lagos Deep Offshore Logistics Base • Lagos, Nigeria • May 2025 – Present</div>
+        <ul>
+          <li>Conduct daily site safety inspections to ensure compliance with company and regulatory HSE standards.</li>
+          <li>Identify workplace hazards and carry out risk assessments to reduce operational risks.</li>
+          <li>Deliver toolbox talks, safety briefings, and safety induction training for workers and contractors.</li>
+          <li>Monitor site operations to ensure adherence to safe work procedures.</li>
+          <li>Report unsafe conditions, incidents, and near misses while supporting incident investigation processes.</li>
+          <li>Maintain HSE documentation, safety records, and compliance reports.</li>
+          <li>Work closely with engineers, supervisors, and operational personnel to strengthen site safety culture.</li>
+        </ul>
+        <p class="muted"><strong>Key Contribution:</strong> Promoted increased safety awareness among site personnel through consistent hazard identification and safety communication.</p>
+      </article>
+
+      <article class="timeline-item">
+        <h3>Technology &amp; Digital Solutions Developer</h3>
+        <div class="meta">Freelance / Independent Projects • Nigeria • 2023 – Present</div>
+        <ul>
+          <li>Design and develop responsive websites for individuals and organizations.</li>
+          <li>Built and deployed a professional portfolio website showcasing personal skills, projects, and services.</li>
+          <li>Developed and managed a digital technology marketplace platform (BMS TECH) focused on the sale of mobile phones and laptops.</li>
+          <li>Utilize AI productivity tools to improve workflow efficiency, content generation, and digital operations.</li>
+          <li>Develop automation scripts and digital tools for operational efficiency and productivity improvement.</li>
+          <li>Manage project repositories, version control, and deployment using GitHub.</li>
+          <li>Provide technical support services including system troubleshooting and digital setup.</li>
+        </ul>
+      </article>
+
+      <article class="timeline-item">
+        <h3>Procurement &amp; Technical Sales Specialist</h3>
+        <div class="meta">Self-Employed • Nigeria • 2019 – Present</div>
+        <ul>
+          <li>Manage procurement and sales of technology devices, real estate opportunities, and related services.</li>
+          <li>Identify market demand and strategically source products and services to meet client needs.</li>
+          <li>Negotiate pricing and service agreements with suppliers and clients.</li>
+          <li>Maintain long-term customer relationships through effective communication and service delivery.</li>
+          <li>Provide technical guidance to customers on product usage and available service options.</li>
+          <li>Maintain accurate records for procurement, sales transactions, and financial operations.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="projects reveal panel-pop">
+  <div class="section-glow"></div>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Projects</h2>
+    </div>
+    <p class="section-subtitle">Selected work reflecting technical, academic, and digital experience.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Solar Panel System Design Project</h3>
+        <p>Designed and implemented a solar panel system as part of an academic project focused on renewable energy integration within buildings.</p>
+      </div>
+      <div class="card">
+        <h3>Final Year Research Project</h3>
+        <p>Conducted research on <em>Skill Improvement Needs among Building Technology Education Students in Ilorin Universities</em>, identifying technical skill gaps and recommending strategies to improve industry readiness.</p>
+      </div>
+      <div class="card">
+        <h3>Professional Portfolio Website</h3>
+        <p>Designed and deployed a personal portfolio website to showcase professional background, projects, and direct contact functionality.</p>
+      </div>
+      <div class="card">
+        <h3>BMS TECH Digital Marketplace</h3>
+        <p>Developing an online technology marketplace focused on the sale of mobile phones and laptops, with ongoing digital setup and brand development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="education reveal panel-pop">
+  <div class="section-glow"></div>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Education &amp; Training</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Education</h3>
+        <p><strong>B.Sc.Ed – Building Technology Education</strong><br />University of Ilorin, Kwara State, Nigeria<br />2024</p>
+      </div>
+      <div class="card">
+        <h3>Training &amp; Professional Development</h3>
+        <p><strong>Health, Safety &amp; Environment Practical Training</strong></p>
+        <ul>
+          <li>Hazard Identification</li>
+          <li>Risk Assessment</li>
+          <li>Toolbox Talks</li>
+          <li>Incident Reporting</li>
+          <li>Workplace Safety Implementation</li>
+        </ul>
+        <p class="muted"><strong>HSE Professional Certification (Level 1–3):</strong> In Progress</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="reveal panel-pop">
+  <div class="section-glow"></div>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <p class="section-subtitle">For job opportunities, professional inquiries, collaborations, or business discussions.</p>
+    <div class="contact-grid">
+      <div class="card">
+        <h3>Get in Touch</h3>
+        <p class="muted">I am open to HSE roles, technical support work, digital development projects, and business opportunities.</p>
+        <ul class="contact-list">
+          <li><strong>Location:</strong> Lagos, Nigeria</li>
+          <li><strong>Phone 1:</strong> <a href="tel:+2348155586606">+234 815 558 6606</a></li>
+          <li><strong>Phone 2:</strong> <a href="tel:+2348140977018">+234 814 097 7018</a></li>
+          <li><strong>Email:</strong> <a href="mailto:adegboyedamilola6@gmail.com">adegboyedamilola6@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Send a Message</h3>
+        <form action="https://formspree.io/f/mzdaeyrv" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <input type="text" name="subject" placeholder="Subject" />
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>  <footer>
     <div class="container">
       <p>© 2026 Adegboye Blessme Damilola. All rights reserved.</p>
     </div>
-  </footer>
-
-  <script>
+  </footer>  <script>
     const revealElements = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver((entries) => {
@@ -876,6 +1083,23 @@
         bg.style.transform = `scale(1.12) translateY(${offset}px)`;
       });
     }, { passive: true });
-  </script>
-</body>
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+    const savedTheme = localStorage.getItem('portfolio-theme');
+
+    const applyTheme = (theme) => {
+      const isLight = theme === 'light';
+      document.body.classList.toggle('light-mode', isLight);
+      themeLabel.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('portfolio-theme', theme);
+    };
+
+    applyTheme(savedTheme || 'dark');
+
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+      applyTheme(nextTheme);
+    });
+  </script></body>
 </html>
