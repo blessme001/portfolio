@@ -96,6 +96,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
   padding: 16px 0;
 }
 
@@ -120,11 +121,63 @@ img { max-width: 100%; display: block; }
   gap: 12px;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   background: rgba(255,255,255,0.03);
   border: 1px solid var(--line);
   padding: 8px;
   border-radius: 999px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.menu-toggle span,
+.menu-toggle span::before,
+.menu-toggle span::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+  position: relative;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  content: "";
+}
+
+.menu-toggle span::before {
+  position: absolute;
+  top: -6px;
+  left: 0;
+}
+
+.menu-toggle span::after {
+  position: absolute;
+  top: 6px;
+  left: 0;
+}
+
+.menu-toggle.active span {
+  background: transparent;
+}
+
+.menu-toggle.active span::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-toggle.active span::after {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 .nav-links a {
@@ -520,6 +573,10 @@ body.light-mode .nav-links {
   background: rgba(255,255,255,0.76);
 }
 
+body.light-mode .menu-toggle {
+  background: rgba(255,255,255,0.82);
+}
+
 body.light-mode .nav-links a {
   color: #3f4d62;
 }
@@ -800,14 +857,26 @@ footer {
   }
 
   .nav-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: center;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
   }
 
   .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
     border-radius: 22px;
-    padding: 8px;
+    padding: 12px;
+    margin-top: 6px;
+  }
+
+  .nav-links.open {
+    display: flex;
   }
 
   .nav-links a,
@@ -853,7 +922,10 @@ footer {
   <div class="ambient"></div>  <header class="navbar">
     <div class="container nav-inner">
       <a href="#home" class="brand">Adegboye Blessme Damilola</a>
-      <nav class="nav-links">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+      </button>
+      <nav class="nav-links" id="siteNav">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
@@ -1188,6 +1260,27 @@ footer {
         bg.style.transform = `scale(1.12) translateY(${offset}px)`;
       });
     }, { passive: true });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const siteNav = document.getElementById('siteNav');
+
+    if (menuToggle && siteNav) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = siteNav.classList.toggle('open');
+        menuToggle.classList.toggle('active', isOpen);
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      siteNav.querySelectorAll('a, button').forEach((item) => {
+        item.addEventListener('click', () => {
+          if (window.innerWidth <= 920) {
+            siteNav.classList.remove('open');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
 
     const themeToggle = document.getElementById('themeToggle');
     const themeLabel = document.getElementById('themeLabel');
