@@ -22,7 +22,7 @@
     }* { box-sizing: border-box; }
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 body {
   margin: 0;
@@ -590,12 +590,7 @@ body.light-mode .panel-pop > .container {
 }
 
 section:nth-of-type(n+2)::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.012), transparent 18%, transparent 82%, rgba(255,255,255,0.012));
-  pointer-events: none;
-  z-index: 0;
+  content: none;
 }
 
 .section-title {
